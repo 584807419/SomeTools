@@ -10,10 +10,10 @@ setup(name='SomeTools',
       author="zhangkun",
       author_email="zk.kyle@foxmail.com",
       project_urls={
-          'Documentation': 'https://github.com/584807419',
-          'Funding': 'https://github.com/584807419',
-          'Source': 'https://github.com/584807419',
-          'Tracker': 'https://github.com/584807419',
+          'Documentation': 'https://github.com/584807419/SomeTools',
+          'Funding': 'https://github.com/584807419/SomeTools',
+          'Source': 'https://github.com/584807419/SomeTools',
+          'Tracker': 'https://github.com/584807419/SomeTools',
       },
       keywords=("Python", "Tools"),
       license='',
@@ -38,4 +38,5 @@ setup(name='SomeTools',
       scripts=[],
       )
 # python setup.py sdist bdist_wheel
-# python -m twine upload --repository testpypi dist/*
+# python -m twine upload --repository pypi dist/*
+# pip install SomeTools -i https://pypi.python.org/simple

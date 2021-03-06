@@ -11,17 +11,17 @@ class GeneralLog:
     #         cls.__instance = super(GeneralLog, cls).__new__(cls, *args, **kwargs)
     #     return cls.__instance
 
-    def __init__(self, file_rec: bool = False, file_name: str = '', file_addr: str = '', *args, **kwargs):
+    def __init__(self, *args, log_file_rec: bool = False, log_file_name: str = '', log_file_addr: str = '', **kwargs):
         super(GeneralLog, self).__init__(*args, **kwargs)
-        if file_rec:
-            if file_name and file_addr:
-                log_name = f'{file_addr}{file_name}.log'
-                log_error_name = f'{file_addr}{file_name}_error.log'
+        if log_file_rec:
+            if log_file_name and log_file_addr:
+                log_name = f'{log_file_addr}{log_file_name}.log'
+                log_error_name = f'{log_file_addr}{log_file_name}_error.log'
             else:
-                log_name = f'{file_name}.log'
-                log_error_name = f'{file_name}_error.log'
-            context_logger.add(log_name, format="{time} {level} {extra[cron_uuid]} {extra[pub_uuid]} {message}", rotation="23:00", retention="7 days", encoding='utf-8', enqueue=True)
-            context_logger.add(log_error_name, format="{time} {level} {extra[cron_uuid]} {extra[pub_uuid]} {message}", rotation="23:00", retention="7 days", encoding='utf-8', enqueue=True, level='ERROR')
+                log_name = f'{log_file_name}.log'
+                log_error_name = f'{log_file_name}_error.log'
+            context_logger.add(log_name, format="{time} {level} {extra[uuid1]} {extra[uuid2]} {message}", rotation="23:00", retention="7 days", encoding='utf-8', enqueue=True)
+            context_logger.add(log_error_name, format="{time} {level} {extra[uuid1]} {extra[uuid2]} {message}", rotation="23:00", retention="7 days", encoding='utf-8', enqueue=True, level='ERROR')
         self.context_logger = context_logger
         self.uuid1 = None
         self.uuid2 = None
@@ -30,8 +30,7 @@ class GeneralLog:
     def get_logger(self, **kwargs):
         uuid1 = self.uuid1 if self.uuid1 else kwargs.get('uuid1')
         uuid2 = self.uuid2 if self.uuid2 else kwargs.get('uuid2')
-        _logger = self.context_logger.bind(uuid1=uuid1, uuid2=uuid2)
-        return _logger
+        return self.context_logger.bind(uuid1=uuid1, uuid2=uuid2)
 
 # aa = GeneralLog()
 # aa.logger.info('info')
@@ -44,12 +43,12 @@ class GeneralLog:
 # import os
 #
 # logs_dir = f"{os.path.dirname(os.path.dirname(__file__))}/log"
-# file_name = 'ApiTestLogs'
+# log_file_name = 'ApiTestLogs'
 #
 #
 # class Loggings:
 #     __instance = None
-#     logger.add(f"{logs_dir}/{file_name}.log", rotation="500MB", encoding="utf-8", enqueue=True,
+#     logger.add(f"{logs_dir}/{log_file_name}.log", rotation="500MB", encoding="utf-8", enqueue=True,
 #                retention="10 days")
 #
 #     def __new__(cls, *args, **kwargs):

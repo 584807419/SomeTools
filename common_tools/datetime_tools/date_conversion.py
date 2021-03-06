@@ -83,8 +83,9 @@ _datetime_fmt_list = ['%Y-%m-%d',
 
 class GeneralDatetime:
     def __init__(self, *args, **kwargs):
-        super(GeneralDatetime, self).__init__(*args, **kwargs)
         self.clean_string = None
+        super(GeneralDatetime, self).__init__(*args, **kwargs)
+
 
     @classmethod
     def str_to_obj(self, datetime_str: str, change_future_time: bool = False) -> datetime.datetime:

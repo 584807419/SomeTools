@@ -1,11 +1,11 @@
 from setuptools import setup
 from setuptools import find_packages
 
-with open("README.md", "r", encoding="utf-8") as fh:
+with open("README.rst", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='SomeTools',
-      version='0.0.3',
+      version='0.0.4',
       description="Some python tools",
       author="zhangkun",
       author_email="zk.kyle@foxmail.com",

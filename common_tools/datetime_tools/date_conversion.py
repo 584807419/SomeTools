@@ -125,6 +125,14 @@ class GeneralDatetime:
                 else:
                     temp_str = datetime_str.replace('分钟前', '')
                 return _now_date_time - timedelta(minutes=int(temp_str))
+        if '天前' in datetime_str:
+            if datetime_str.endswith('天前'):
+                if ':' in datetime_str:
+                    temp_str = datetime_str.replace('天前', '')
+                    temp_str = temp_str.split(':')[-1]
+                else:
+                    temp_str = datetime_str.replace('天前', '')
+                return _now_date_time - timedelta(days=int(temp_str))
 
         p_date = None
         for _temp_index, fmt in enumerate(_datetime_fmt_list):

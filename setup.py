@@ -5,7 +5,7 @@ with open("README.rst", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='SomeTools',
-      version='0.0.5',
+      version='0.0.7',
       description="Some python tools",
       author="zhangkun",
       author_email="zk.kyle@foxmail.com",
@@ -37,6 +37,8 @@ setup(name='SomeTools',
       platforms="any",
       scripts=[],
       )
+
+# https://blog.csdn.net/yifengchaoran/article/details/113447773
 # python setup.py sdist bdist_wheel
 # python -m twine upload --repository pypi dist/*
 # pip install SomeTools -i https://pypi.python.org/simple

@@ -1,5 +1,6 @@
 SomeTools
 ========
+
 .. image:: https://img.shields.io/pypi/v/SomeTools.svg
     :target: https://pypi.org/project/SomeTools/
     :alt: Latest Version
@@ -13,8 +14,6 @@ SomeTools
 .. image:: https://img.shields.io/pypi/l/SomeTools.svg
     :target: https://pypi.org/project/SomeTools/
 
-
-========
 
 功能(Features)
 --------

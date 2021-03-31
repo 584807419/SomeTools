@@ -6,6 +6,7 @@ from datetime import timedelta
 
 _datetime_fmt_list = ['%Y-%m-%d',
                       '%Y%m%d',
+                      '%d/%m/%Y %H:%M',
                       '%d-%b-%Y%H:%M',
                       '    (%m/%d %H:%M)',
                       '%m/%d',

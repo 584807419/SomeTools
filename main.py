@@ -28,3 +28,6 @@ if __name__ == '__main__':
     demo_ins.logger.error(f"{Demo.get_pinyin('中国外汇交易中心')}")
     demo_ins.logger.exception(f"{Demo.get_pinyin('中国外汇交易中心')}")
 
+    demo_ins.logger.info(f"繁体转简体 眾議長與李克強會談->{Demo.traditional_chinese_to_simplified('眾議長與李克強會談')}")
+    demo_ins.logger.info(f"简体转繁体 众议长与李克强会谈->{Demo.simplified_chinese_to_traditional_chinese('众议长与李克强会谈')}")
+

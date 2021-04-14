@@ -30,6 +30,7 @@ setup(name='SomeTools',
       install_requires=[
           "datetime",
           "loguru",  # 高效优雅的日志显示
+          "opencc-python-reimplemented",  # 繁体简体转换
           # "orjson",  # 底层使用了rust，Python下最快的json库,比 ujson 快 3 倍，比 json 快 6 倍
       ],
       py_modules=['sometools'],

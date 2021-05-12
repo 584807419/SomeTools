@@ -1,5 +1,24 @@
 """无脑处理时间（兼容各种类型和格式互转）"""
 
+# %a 英文星期简写
+# %A 英文星期的完全
+# %b 英文月份的简写
+# %B 英文月份的完全
+# %c 显示本地日期时间
+# %d 日期，取1-31
+# %H 小时， 0-23
+# %I 小时， 0-12
+# %m 月， 01 -12
+# %M 分钟，1-59
+# %j 年中当天的天数
+# %w 显示今天是星期几
+# %W 第几周
+# %x 当天日期
+# %X 本地的当天时间
+# %y 年份 00-99间
+# %Y 年份的完整拼写
+
+
 import re
 import datetime
 from datetime import timedelta
@@ -79,6 +98,7 @@ _datetime_fmt_list = ['%Y-%m-%d',
                       '%Y-%m-%d%H:%M:%S',
                       '今天 %M:%S',
                       '时间：%Y年%m月%d日 %H:%M:%S&nbsp中财网',
+                      '%m-%b-%Y %H:%M',
                       ]
 
 
@@ -86,7 +106,6 @@ class GeneralDatetime:
     def __init__(self, *args, **kwargs):
         self.clean_string = None
         super(GeneralDatetime, self).__init__(*args, **kwargs)
-
 
     @classmethod
     def str_to_obj(self, datetime_str: str, change_future_time: bool = False) -> datetime.datetime:
@@ -98,9 +117,10 @@ class GeneralDatetime:
         """
         assert isinstance(datetime_str, str)
         if not self.clean_string:
-            from common_tools.string_tools.string_cleaning import GeneralString
+            from sometools.string_tools.string_cleaning import GeneralString
             self.clean_string = GeneralString().clean_string
 
+        # 1. 处理常见时间文字描述
         _now_date_time = datetime.datetime.now()
         datetime_str = self.clean_string(datetime_str)
         if datetime_str in ['昨天', '1天前']:
@@ -109,7 +129,6 @@ class GeneralDatetime:
             return _now_date_time - timedelta(days=2)
         if datetime_str in ['大前天', '3天前']:
             return _now_date_time - timedelta(days=3)
-
         if '小时前' in datetime_str:
             if datetime_str.endswith('小时前'):
                 if ':' in datetime_str:
@@ -134,7 +153,24 @@ class GeneralDatetime:
                 else:
                     temp_str = datetime_str.replace('天前', '')
                 return _now_date_time - timedelta(days=int(temp_str))
+        if '刚刚' in datetime_str:
+            return _now_date_time
 
+        # 2. 处理带时区的缩写的 step1
+        # EDT（Eastern Daylight Timing）指美国东部夏令时间。东部时区慢北京时间12小时。
+        # GMT Greenwich Mean Time 格林尼治标准时间 北京时区比GMT快8个小时
+        # EST eastern standard time (美国)东部标准时间  慢北京时间 13个小时。
+        time_zone_dict = {'EDT': 12,
+                          'EST': 13,
+                          'GMT': 8, }
+        timze_zone_timedelta = 0
+        for str_key, str_valeu in time_zone_dict.items():
+            if str_key in datetime_str:
+                datetime_str = datetime_str.replace(str_key, '')
+                timze_zone_timedelta = str_valeu
+                break
+
+        # 开始匹配转换字符串到对象
         p_date = None
         for _temp_index, fmt in enumerate(_datetime_fmt_list):
             try:
@@ -149,6 +185,9 @@ class GeneralDatetime:
                 else:
                     pass
         if p_date:
+            # 2. 处理带时区的缩写的 step2
+            p_date = p_date + timedelta(hours=timze_zone_timedelta)
+
             # 不带年的加上年
             if p_date.year == 1900:
                 p_date = p_date.replace(year=_now_date_time.year)
@@ -163,14 +202,14 @@ class GeneralDatetime:
             return p_date
 
     @staticmethod
-    def obj_to_str(datetime_obj: datetime.datetime) -> str:
+    def obj_to_str(datetime_obj: datetime.datetime, datetime_format_str: str = "%Y-%m-%d %H:%M:%S") -> str:
         """
         datetime对象转为字符串
         :param datetime_obj: datetime.datetime
         :return: str
         """
         assert isinstance(datetime_obj, datetime.datetime)
-        return datetime.datetime.strftime(datetime_obj, "%Y-%m-%d %H:%M:%S")
+        return datetime.datetime.strftime(datetime_obj, datetime_format_str)
 
     @staticmethod
     def timestamp_int_to_obj(timestamp_int: int) -> datetime.datetime:

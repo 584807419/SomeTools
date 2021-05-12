@@ -15,3 +15,16 @@ class GeneralString:
             return str(_temp_str.strip())
         else:
             return ''
+
+    @staticmethod
+    def clean_string_without_space(temp_string: str) -> str:
+        """
+        去掉回车换行等但是保留空格
+        :param temp_string: str
+        :return: str
+        """
+        if temp_string:
+            _temp_str = ''.join(temp_string).replace('\r', '').replace('\n', '').replace('\t', '').replace('\\r', '').replace('\\n', '').replace('\\t', '')
+            return str(_temp_str.strip())
+        else:
+            return ''

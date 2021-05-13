@@ -1,5 +1,10 @@
 """无脑处理时间（兼容各种类型和格式互转）"""
 
+# 时区
+# https://blog.csdn.net/x356982611/article/details/90296245
+
+# %代号
+# https://blog.csdn.net/cunchi4221/article/details/107475858
 # %a 英文星期简写
 # %A 英文星期的完全
 # %b 英文月份的简写

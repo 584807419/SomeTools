@@ -9,4 +9,3 @@ from sometools.traditional_simplified_chinese_conversion.traditional_simplified_
 class Common_tools(GeneralChineseToPinyin, GeneralTraditionalSimplifiedChinese, GeneralDatetime, GeneralString, GeneralLog):
     def __init__(self, *args, **kwargs):
         super(Common_tools, self).__init__(*args, **kwargs)
-        self.logger.debug('SomeTools: Common_tools initialized')

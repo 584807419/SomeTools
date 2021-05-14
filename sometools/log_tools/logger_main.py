@@ -1,7 +1,7 @@
+# https://loguru.readthedocs.io/en/stable/overview.html#ready-to-use-out-of-the-box-without-boilerplate
+
+import sys
 from loguru import logger as context_logger
-
-
-# from conf import DIR
 
 
 class GeneralLog:
@@ -17,6 +17,8 @@ class GeneralLog:
         log_file_rec = kwargs.get('log_file_rec')
         log_file_name = kwargs.get('log_file_name')
         log_file_addr = kwargs.get('log_file_addr')
+        context_logger.remove()
+        context_logger.add(sys.stdout, colorize=True, format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> <cyan>{extra[uuid1]}</cyan> <blue>{extra[uuid2]}</blue> <level>{message}</level>", enqueue=True)
         if log_file_rec:
             if log_file_name and log_file_addr:
                 log_name = f'{log_file_addr}{log_file_name}.log'
@@ -24,17 +26,18 @@ class GeneralLog:
             else:
                 log_name = f'{log_file_name}.log'
                 log_error_name = f'{log_file_name}_error.log'
-            context_logger.add(log_name, format="{time} {level} {extra[uuid1]} {extra[uuid2]} {message}", rotation="23:00", retention="7 days", encoding='utf-8', enqueue=True)
-            context_logger.add(log_error_name, format="{time} {level} {extra[uuid1]} {extra[uuid2]} {message}", rotation="23:00", retention="7 days", encoding='utf-8', enqueue=True, level='ERROR')
+            # https://loguru.readthedocs.io/en/stable/_modules/loguru/_logger.html?highlight=cyan#
+            context_logger.add(log_name, format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> {level} <cyan>{extra[uuid1]}</cyan> <blue>{extra[uuid2]}</blue> {message}", rotation="23:00", retention="7 days", encoding='utf-8', enqueue=True)
+            context_logger.add(log_error_name, format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> {level} <cyan>{extra[uuid1]}</cyan> <blue>{extra[uuid2]}</blue> {message}", rotation="23:00", retention="7 days", encoding='utf-8', enqueue=True, level='ERROR')
+
         self.context_logger = context_logger
-        self.uuid1 = None
-        self.uuid2 = None
-        self.logger = self.get_logger()
+        self.logger = self.get_logger
 
     def get_logger(self, **kwargs):
-        uuid1 = self.uuid1 if self.uuid1 else kwargs.get('uuid1')
-        uuid2 = self.uuid2 if self.uuid2 else kwargs.get('uuid2')
-        return self.context_logger.bind(uuid1=uuid1, uuid2=uuid2)
+        uuid1 = self.uuid1 if hasattr(self, 'uuid1') else kwargs.get('uuid1')
+        uuid2 = self.uuid2 if hasattr(self, 'uuid2') else kwargs.get('uuid2')
+        self.context_logger = self.context_logger.patch(lambda record: record["extra"].update(uuid1=uuid1, uuid2=uuid2))
+        return self.context_logger
 
 # aa = GeneralLog()
 # aa.logger.info('info')

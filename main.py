@@ -10,12 +10,9 @@ class Demo(Common_tools):
 
 if __name__ == '__main__':
     demo_ins = Demo()
-    demo_ins.uuid1 = 'uuid1'
-    demo_ins.uuid2 = 'uuid2'
-
 
     # 将输入的任何类型的日期字符串类型转化为datetime.datetime类型的日期对象(北京时间UTC+8)(Converts any type of date string type entered to a date object of type datetime.datetime)(beijing time UTC+8)
-    demo_ins.logger().info(f"{demo_ins.str_to_obj('2012-12-12 12:12:12')}{type(demo_ins.str_to_obj('2012-12-12 12:12:12'))}")
+    demo_ins.logger(uuid1='uuid1', uuid2='uuid2').info(f"{demo_ins.str_to_obj('2012-12-12 12:12:12')}{type(demo_ins.str_to_obj('2012-12-12 12:12:12'))}")
     demo_ins.logger().info(f"{demo_ins.str_to_obj('11-May-2021 07:03 EDT')}{type(demo_ins.str_to_obj('11-May-2021 07:03 EDT'))}")
 
     # 移除一个字符串中的回车换行空格制表符等内容(Remove carriage return, newline space tabs, etc., from a string)

@@ -34,8 +34,8 @@ class GeneralLog:
         self.logger = self.get_logger
 
     def get_logger(self, **kwargs):
-        uuid1 = self.uuid1 if hasattr(self, 'uuid1') else kwargs.get('uuid1')
-        uuid2 = self.uuid2 if hasattr(self, 'uuid2') else kwargs.get('uuid2')
+        uuid1 = kwargs.get('uuid1') or ''
+        uuid2 = kwargs.get('uuid2') or ''
         self.context_logger = self.context_logger.patch(lambda record: record["extra"].update(uuid1=uuid1, uuid2=uuid2))
         return self.context_logger
 

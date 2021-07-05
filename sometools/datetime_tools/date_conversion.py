@@ -161,6 +161,12 @@ class GeneralDatetime:
         if '刚刚' in datetime_str:
             return _now_date_time
 
+        if len(datetime_str) >= 10:
+            try:
+                return datetime.datetime.fromtimestamp(float(datetime_str[:10]))
+            except:
+                pass
+
         # 2. 处理带时区的缩写的 step1
         # EDT（Eastern Daylight Timing）指美国东部夏令时间。东部时区慢北京时间12小时。
         # GMT Greenwich Mean Time 格林尼治标准时间 北京时区比GMT快8个小时

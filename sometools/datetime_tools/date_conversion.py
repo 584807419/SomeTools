@@ -130,8 +130,14 @@ class GeneralDatetime:
         datetime_str = self.clean_string(datetime_str)
         if datetime_str in ['昨天', '1天前']:
             return _now_date_time - timedelta(days=1)
+        if '昨天' in datetime_str:
+            return _now_date_time - timedelta(days=1)
+
         if datetime_str in ['前天', '2天前']:
             return _now_date_time - timedelta(days=2)
+        if '前天' in datetime_str:
+            return _now_date_time - timedelta(days=2)
+
         if datetime_str in ['大前天', '3天前']:
             return _now_date_time - timedelta(days=3)
         if '小时前' in datetime_str:

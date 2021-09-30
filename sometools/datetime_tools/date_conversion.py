@@ -199,6 +199,10 @@ class GeneralDatetime:
                     if mat:
                         datetime_str = mat.groups()[0]
                         p_date = datetime.datetime.strptime(datetime_str, '%Y-%m-%d')
+                    mat = re.search(r"(\d{4}年\d{1,2}月\d{1,2}日)", datetime_str)
+                    if mat:
+                        datetime_str = mat.groups()[0]
+                        p_date = datetime.datetime.strptime(datetime_str, '%Y年%m月%d日')
                 else:
                     pass
         if p_date:

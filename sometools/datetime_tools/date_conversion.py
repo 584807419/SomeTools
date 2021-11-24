@@ -109,7 +109,6 @@ _datetime_fmt_list = ['%Y-%m-%d',
 
 class GeneralDatetime:
     def __init__(self, *args, **kwargs):
-        self.clean_string = None
         super(GeneralDatetime, self).__init__(*args, **kwargs)
 
     @classmethod
@@ -121,7 +120,7 @@ class GeneralDatetime:
         :return: datetime.datetime
         """
         assert isinstance(datetime_str, str)
-        if not self.clean_string:
+        if not hasattr(self, 'clean_string'):
             from sometools.string_tools.string_cleaning import GeneralString
             self.clean_string = GeneralString().clean_string
 
@@ -229,7 +228,12 @@ class GeneralDatetime:
         :param datetime_obj: datetime.datetime
         :return: str
         """
-        assert isinstance(datetime_obj, datetime.datetime)
+        try:
+            assert isinstance(datetime_obj, datetime.datetime)
+        except Exception as e:
+            print(datetime_obj)
+            print(e)
+            return ''
         return datetime.datetime.strftime(datetime_obj, datetime_format_str)
 
     @staticmethod

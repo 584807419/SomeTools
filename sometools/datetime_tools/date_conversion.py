@@ -165,6 +165,8 @@ class GeneralDatetime:
                 return _now_date_time - timedelta(days=int(temp_str))
         if '刚刚' in datetime_str:
             return _now_date_time
+        if '今天' in datetime_str:
+            return _now_date_time
 
         if len(datetime_str) >= 10:
             try:

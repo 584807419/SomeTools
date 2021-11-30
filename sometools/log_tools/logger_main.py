@@ -15,6 +15,7 @@ class GeneralLog:
     def __init__(self, *args, **kwargs):
         super(GeneralLog, self).__init__()
         log_file_rec = kwargs.get('log_file_rec')
+        log_file_retention_days = kwargs.get('log_file_retention_days', 7)
         log_file_name = kwargs.get('log_file_name')
         log_file_addr = kwargs.get('log_file_addr')
         context_logger.remove()
@@ -27,8 +28,8 @@ class GeneralLog:
                 log_name = f'{log_file_name}.log'
                 log_error_name = f'{log_file_name}_error.log'
             # https://loguru.readthedocs.io/en/stable/_modules/loguru/_logger.html?highlight=cyan#
-            context_logger.add(log_name, format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> {level} <cyan>{extra[uuid1]}</cyan> <blue>{extra[uuid2]}</blue> {message}", rotation="23:00", retention="30 days", encoding='utf-8', enqueue=True)
-            context_logger.add(log_error_name, format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> {level} <cyan>{extra[uuid1]}</cyan> <blue>{extra[uuid2]}</blue> {message}", rotation="23:00", retention="30 days", encoding='utf-8', enqueue=True, level='ERROR')
+            context_logger.add(log_name, format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> {level} <cyan>{extra[uuid1]}</cyan> <blue>{extra[uuid2]}</blue> {message}", rotation="23:00", retention=f"{log_file_retention_days} days", encoding='utf-8', enqueue=True)
+            context_logger.add(log_error_name, format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> {level} <cyan>{extra[uuid1]}</cyan> <blue>{extra[uuid2]}</blue> {message}", rotation="23:00", retention=f"{log_file_retention_days} days", encoding='utf-8', enqueue=True, level='ERROR')
 
         self.context_logger = context_logger
         self.logger = self.get_logger

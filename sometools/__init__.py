@@ -4,10 +4,13 @@ from sometools.string_tools.string_cleaning import GeneralString
 from sometools.log_tools.logger_main import GeneralLog
 from sometools.datetime_tools.date_conversion import GeneralDatetime
 from sometools.chinese_to_pinyin_acronym.chinese_to_pinyin import GeneralChineseToPinyin
-from sometools.traditional_simplified_chinese_conversion.traditional_simplified_chinese import GeneralTraditionalSimplifiedChinese
+from sometools.traditional_simplified_chinese_conversion.traditional_simplified_chinese import \
+    GeneralTraditionalSimplifiedChinese
 from sometools.url_tools.url_encode_decode import GeneralUrlEncodeDecode
+from sometools.redis_tools.redis import GeneralRedis
 
 
-class Common_tools(GeneralChineseToPinyin, GeneralTraditionalSimplifiedChinese, GeneralUrlEncodeDecode, GeneralDatetime, GeneralString, GeneralLog):
+class Common_tools(GeneralChineseToPinyin, GeneralTraditionalSimplifiedChinese, GeneralUrlEncodeDecode, GeneralDatetime,
+                   GeneralString, GeneralLog, GeneralRedis):
     def __init__(self, *args, **kwargs):
         super(Common_tools, self).__init__(*args, **kwargs)

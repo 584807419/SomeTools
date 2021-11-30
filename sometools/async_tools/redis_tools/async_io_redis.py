@@ -10,7 +10,7 @@ if not (platform.system() == 'Windows'):
 
 class GeneralAsyncIoRedis:
     def __init__(self, *args, **kwargs):
-        pass
+        super(GeneralAsyncIoRedis, self).__init__(*args, **kwargs)
 
     async def get_async_redis_conn(self, **kwargs):
         return await aioredis.create_redis_pool((kwargs.get('redis_host'), kwargs.get('redis_port')), encoding='utf-8',

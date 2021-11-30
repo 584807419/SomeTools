@@ -13,7 +13,7 @@ class GeneralLog:
 
     # def __init__(self, *args, log_file_rec: bool = False, log_file_name: str = '', log_file_addr: str = '', **kwargs):
     def __init__(self, *args, **kwargs):
-        super(GeneralLog, self).__init__()
+        super(GeneralLog, self).__init__(*args, **kwargs)
         log_file_rec = kwargs.get('log_file_rec')
         log_file_retention_days = kwargs.get('log_file_retention_days', 7)
         log_file_name = kwargs.get('log_file_name')

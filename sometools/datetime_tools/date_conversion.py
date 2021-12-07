@@ -28,7 +28,8 @@ import re
 import datetime
 from datetime import timedelta
 
-_datetime_fmt_list = ['%Y-%m-%d',
+_datetime_fmt_list = ['%Y-%m-%d %H:%M:%S',
+                      '%Y-%m-%d',
                       '%Y%m%d',
                       '%d/%m/%Y %H:%M',
                       '%d-%b-%Y%H:%M',
@@ -120,13 +121,13 @@ class GeneralDatetime:
         :return: datetime.datetime
         """
         assert isinstance(datetime_str, str)
-        if not hasattr(self, 'clean_string'):
+        if not hasattr(self, 'clean_string_5_space_limit'):
             from sometools.string_tools.string_cleaning import GeneralString
-            self.clean_string = GeneralString().clean_string
+            self.clean_string_5_space_limit = GeneralString().clean_string_5_space_limit
 
         # 1. 处理常见时间文字描述
         _now_date_time = datetime.datetime.now()
-        datetime_str = self.clean_string(datetime_str)
+        datetime_str = self.clean_string_5_space_limit(datetime_str)
         if datetime_str in ['昨天', '1天前']:
             return _now_date_time - timedelta(days=1)
         if '昨天' in datetime_str:
@@ -192,7 +193,7 @@ class GeneralDatetime:
         p_date = None
         for _temp_index, fmt in enumerate(_datetime_fmt_list):
             try:
-                p_date = datetime.datetime.strptime(datetime_str, self.clean_string(fmt))
+                p_date = datetime.datetime.strptime(self.clean_string_5_space_limit(datetime_str), self.clean_string_5_space_limit(fmt))
                 break
             except Exception as e:
                 if _temp_index == len(_datetime_fmt_list) - 1:

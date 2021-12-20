@@ -1,10 +1,14 @@
+# SomeTools
+
+一些常用工具
+
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg?style=plastic)](./LICENSE)
 [![pypi](https://img.shields.io/pypi/v/SomeTools.svg?style=plastic)](https://pypi.org/project/SomeTools/)
 [![wheel](https://img.shields.io/pypi/wheel/SomeTools.svg?style=plastic)](https://pypi.org/project/SomeTools/)
 [![pyversions](https://img.shields.io/pypi/pyversions/SomeTools.svg?style=plastic)](https://pypi.org/project/SomeTools/)
 [![Downloads](https://pepy.tech/badge/SomeTools?style=plastic)](https://pepy.tech/badge/SomeTools)
 
------------
+---------------------------------------------
 
 一些方便日常使用的工具
 
@@ -17,17 +21,16 @@
 * 正则表达式提取字符串中的中文内容工具
 
 
-Installation
------------
+## Installation
 
 ``` bash
 $ pip install SomeTools -i https://pypi.python.org/simple
 ```
 
-Getting Started
------------
 
-1.同步工具使用
+## Getting Started
+
+### 1.同步工具使用
 
 ``` pycon
 from sometools import Common_tools
@@ -85,9 +88,7 @@ if __name__ == '__main__':
 ```
 
 
---------------------
-
-2.异步工具使用
+### 2.异步工具使用
 
 ``` pycon
 import asyncio

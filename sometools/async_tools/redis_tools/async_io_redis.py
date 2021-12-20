@@ -1,6 +1,7 @@
 import asyncio
 import aioredis
 import platform
+from sometools.async_tools.base import Base
 
 if not (platform.system() == 'Windows'):
     import uvloop
@@ -8,9 +9,9 @@ if not (platform.system() == 'Windows'):
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())  # 使用 uvloop 来替换 asyncio 内部的事件循环。
 
 
-class GeneralAsyncIoRedis:
+class AsyncIoRedisMixIn(Base):
     def __init__(self, *args, **kwargs):
-        super(GeneralAsyncIoRedis, self).__init__(*args, **kwargs)
+        super(AsyncIoRedisMixIn, self).__init__(*args, **kwargs)
 
     async def get_async_redis_conn(self, **kwargs):
         return await aioredis.create_redis_pool((kwargs.get('redis_host'), kwargs.get('redis_port')), encoding='utf-8',

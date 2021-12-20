@@ -47,3 +47,6 @@ if __name__ == '__main__':
     demo_ins.logger().info(f"redis set {msg}")
     msg = redis_conn.get('temp_key1')
     demo_ins.logger().info(f"redis get {msg}")
+
+    temp_str = demo_ins.extract_one_chinese("""downloadPdf1('http://www.sse.com.cn/disclosure/bond/announcement/company/c/2021-03-22/4135530025747110334559080.pdf','厦门建发股份有限公司2021年面向专业投资者公开发行可续期公司债券（第一期）发行公告','2021-03-22','1015','pdf');""")
+    demo_ins.logger().info(f"正则提取单个中文 {temp_str}")

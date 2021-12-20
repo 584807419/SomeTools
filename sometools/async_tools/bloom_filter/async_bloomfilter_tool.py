@@ -1,6 +1,7 @@
 # 布隆过滤器,基于redis from：https://blog.csdn.net/bone_ace/article/details/53107018
 
 from hashlib import md5
+from sometools.async_tools.base import Base
 
 class SimpleBloomFilterHash:
     def __init__(self, cap, seed):
@@ -14,7 +15,7 @@ class SimpleBloomFilterHash:
         return (self.cap - 1) & ret
 
 
-class AioGeneralBloomFilter:
+class AioBloomFilterMixIn(Base):
     def __init__(self, *args, block_num=2, key='bloomfilter', **kwargs):
         # super(AioGeneralBloomFilter, self).__init__(*args, **kwargs)
         self.bloom_filter_timeout = kwargs.get('bloom_filter_timeout')
@@ -25,6 +26,7 @@ class AioGeneralBloomFilter:
         self.bloom_filter_hashfunc = []
         for seed in self.bloom_filter_seeds:
             self.bloom_filter_hashfunc.append(SimpleBloomFilterHash(self.bit_size, seed))
+        super(AioBloomFilterMixIn, self).__init__(*args, **kwargs)
 
     async def aio_is_bloom_filter_contains(self, str_input:str)->int:
         try:

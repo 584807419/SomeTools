@@ -45,6 +45,7 @@ _datetime_fmt_list = ['%Y-%m-%d %H:%M:%S',
                       '%Y%m%d',
                       '%d/%m/%Y %H:%M',
                       '%d-%b-%Y%H:%M',
+                      '%d-%b-%Y %H:%M ',
                       '    (%m/%d %H:%M)',
                       '%m/%d',
                       '%m/%d/%Y %H:%M:%S',
@@ -125,8 +126,11 @@ class DatetimeMixIn(Base):
         """
         assert isinstance(datetime_str, str)
         if not hasattr(self, 'clean_string_5_space_limit'):
-            from sometools.sync_tools.string_tools import RedisMixIn
-            self.clean_string_5_space_limit = RedisMixIn().clean_string_5_space_limit
+            from sometools.sync_tools.string_tools import StringMixIn
+            self.clean_string_5_space_limit = StringMixIn().clean_string_5_space_limit
+        if not hasattr(self, 'clean_string_5_space_limit'):
+            from sometools.sync_tools.string_tools import StringMixIn
+            self.clean_string = StringMixIn().clean_string
 
         # 1. 处理常见时间文字描述
         _now_date_time = datetime.datetime.now()
@@ -210,6 +214,24 @@ class DatetimeMixIn(Base):
                         p_date = datetime.datetime.strptime(datetime_str, '%Y年%m月%d日')
                 else:
                     pass
+        if not p_date:  # 如果保留部分空格拿不到日期，那么就去掉所有的空格去进行匹配
+            for _temp_index, fmt in enumerate(_datetime_fmt_list):
+                try:
+                    p_date = datetime.datetime.strptime(self.clean_string(datetime_str),
+                                                        self.clean_string(fmt))
+                    break
+                except Exception as e:
+                    if _temp_index == len(_datetime_fmt_list) - 1:
+                        mat = re.search(r"(\d{4}-\d{1,2}-\d{1,2})", datetime_str)
+                        if mat:
+                            datetime_str = mat.groups()[0]
+                            p_date = datetime.datetime.strptime(datetime_str, '%Y-%m-%d')
+                        mat = re.search(r"(\d{4}年\d{1,2}月\d{1,2}日)", datetime_str)
+                        if mat:
+                            datetime_str = mat.groups()[0]
+                            p_date = datetime.datetime.strptime(datetime_str, '%Y年%m月%d日')
+                    else:
+                        pass
         if p_date:
             # 2. 处理带时区的缩写的 step2
             p_date = p_date + timedelta(hours=timze_zone_timedelta)

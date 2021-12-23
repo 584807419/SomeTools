@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='SomeTools',
-      version='0.1.28',
+      version='0.1.30',
       description="Some python tools",
       author="zhangkun",
       author_email="zk.kyle@foxmail.com",

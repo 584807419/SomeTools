@@ -10,9 +10,10 @@ from sometools.sync_tools.url_tools import UrlEncodeDecodeMixIn
 from sometools.sync_tools.redis_tools import RedisMixIn
 from sometools.sync_tools.re_tools import ExtractStringMixIn
 from sometools.sync_tools.image_tools import ImageMixin
+from sometools.sync_tools.char_tools import CharMixin
 
 
 class Common_tools(ChineseToPinyinMixIn, TraditionalSimplifiedChineseMixIn, UrlEncodeDecodeMixIn, DatetimeMixIn,
-                   StringMixIn, ImageMixin, ExtractStringMixIn, LogMixIn, RedisMixIn):
+                   StringMixIn, ImageMixin, CharMixin, ExtractStringMixIn, LogMixIn, RedisMixIn):
     def __init__(self, *args, **kwargs):
         super(Common_tools, self).__init__(*args, **kwargs)

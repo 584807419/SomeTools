@@ -67,3 +67,9 @@ if __name__ == '__main__':
     print(f"图片模糊后路径{temp_aa}")
     temp_aa, img_path = demo_ins.img_generate_verification_code(r'E:\Users\Administrator\Documents\SomeTools\Arial.ttf', r'E:\Users\Administrator\Documents\SomeTools\\')
     print(f"根据字符串{temp_aa}生成验证码{img_path}")
+
+    # 查看内存信息
+    print(f'内存信息：{demo_ins.os_memory_info()} 可用内存剩余：{demo_ins.os_memory_info().free}')
+    print(f'CPU信息：{demo_ins.os_cpu_info()}')
+    print(f'硬盘信息：{demo_ins.os_disk_info()}')
+    print(f'网络信息：{demo_ins.os_net_info()}')

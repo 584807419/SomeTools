@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='SomeTools',
-      version='0.1.32',
+      version='0.1.33',
       description="Some python tools",
       author="zhangkun",
       author_email="zk.kyle@foxmail.com",
@@ -25,17 +25,17 @@ setup(name='SomeTools',
           "License :: OSI Approved :: MIT License",
           "Operating System :: OS Independent",
       ],
-      python_requires='>=3.6',  # 对python的最低版本要求
+      python_requires='>=3.8',  # 对python的最低版本要求
       packages=find_packages(),
       install_requires=[
           "datetime",
           "loguru==0.5.3",  # 高效优雅的日志显示
           "opencc-python-reimplemented==0.1.6",  # 繁体简体转换
           "redis==4.0.2",
-          "aioredis==1.3.1",
+          "aioredis==2.0.1",
           "pillow==8.4.0",
           "chardet==4.0.0",
-          "psutil==5.8.0",
+          "psutil==5.9.0",
           # "orjson",  # 底层使用了rust，Python下最快的json库,比 ujson 快 3 倍，比 json 快 6 倍
       ],
       py_modules=['sometools'],
@@ -48,3 +48,5 @@ setup(name='SomeTools',
 # python setup.py sdist bdist_wheel
 # python -m twine upload --repository pypi dist/*
 # pip install SomeTools -i https://pypi.python.org/simple
+
+# python -m pip install --upgrade pip

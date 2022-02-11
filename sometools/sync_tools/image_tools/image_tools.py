@@ -72,7 +72,7 @@ class ImageMixin(Base):
         # 模糊:
         image = image.filter(ImageFilter.BLUR)
         _output_path_str = _temp_str+'.jpg'
-        if img_path:  # E:\Users\Administrator\Documents\SomeTools\win11_sunrise.jpg
+        if img_path:
             _output_path_str = img_path + 'code.jpg'
         image.save(_output_path_str, 'jpeg')
         return _temp_str, _output_path_str

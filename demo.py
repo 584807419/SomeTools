@@ -62,9 +62,11 @@ if __name__ == '__main__':
     print(f'检测bytes内容编码结果：{demo_ins.char_detect(_temp_content)}')
     print(f'解码bytes内容转为str结果：{demo_ins.char_to_str(_temp_content)}')
 
-    # 图片处理
+    # 图片模糊
     temp_aa = demo_ins.img_blurred(r'E:\Users\Administrator\Documents\SomeTools\win11_sunrise.jpg')
     print(f"图片模糊后路径{temp_aa}")
+
+    # 生成验证码
     temp_aa, img_path = demo_ins.img_generate_verification_code(r'E:\Users\Administrator\Documents\SomeTools\Arial.ttf', r'E:\Users\Administrator\Documents\SomeTools\\')
     print(f"根据字符串{temp_aa}生成验证码{img_path}")
 

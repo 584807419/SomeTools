@@ -44,9 +44,13 @@ setup(name='SomeTools',
       scripts=[],
       )
 
-# https://blog.csdn.net/yifengchaoran/article/details/113447773
-# python setup.py sdist bdist_wheel
-# python -m twine upload --repository pypi dist/*
-# pip install SomeTools -i https://pypi.python.org/simple
 
+# 上传pypi
+# python -m pip install --upgrade twine
+# python -m twine upload --repository pypi dist/*
+
+# 打包
+# https://blog.csdn.net/yifengchaoran/article/details/113447773
 # python -m pip install --upgrade pip
+# python -m pip install  --upgrade setuptools wheel
+# python setup.py sdist bdist_wheel

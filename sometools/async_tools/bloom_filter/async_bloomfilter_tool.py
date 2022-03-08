@@ -18,7 +18,7 @@ class SimpleBloomFilterHash:
 class AioBloomFilterMixIn(Base):
     def __init__(self, *args, block_num=2, key='bloomfilter', **kwargs):
         # super(AioGeneralBloomFilter, self).__init__(*args, **kwargs)
-        self.bloom_filter_timeout = kwargs.get('bloom_filter_timeout')
+        self.bloom_filter_timeout = kwargs.get('bloom_filter_timeout') or 7200  # 布隆过滤key过期时间
         self.bit_size = 1 << 31  # Redis的String类型最大容量为512M，现使用256M
         self.bloom_filter_seeds = [5, 7, 11, 13, 31, 37, 61]
         self.bloom_filter_key = key

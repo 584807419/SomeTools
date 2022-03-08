@@ -59,7 +59,6 @@ docs/_build/
 target/
 
 .idea/
-spider.git/
 
 *.html
 test/*

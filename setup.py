@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='SomeTools',
-      version='0.1.33',
+      version='0.1.36',
       description="Some python tools",
       author="zhangkun",
       author_email="zk.kyle@foxmail.com",
@@ -28,7 +28,7 @@ setup(name='SomeTools',
       python_requires='>=3.8',  # 对python的最低版本要求
       packages=find_packages(),
       install_requires=[
-          "datetime",
+          "DateTime==4.3",
           "loguru==0.5.3",  # 高效优雅的日志显示
           "opencc-python-reimplemented==0.1.6",  # 繁体简体转换
           "redis==4.0.2",
@@ -36,6 +36,8 @@ setup(name='SomeTools',
           "pillow==8.4.0",
           "chardet==4.0.0",
           "psutil==5.9.0",
+          "aiomysql==0.0.22",
+          "pymysql==0.9.3",
           # "orjson",  # 底层使用了rust，Python下最快的json库,比 ujson 快 3 倍，比 json 快 6 倍
       ],
       py_modules=['sometools'],

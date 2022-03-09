@@ -17,7 +17,7 @@ class CharMixin(Base):
     @staticmethod
     def char_to_str(bytes_content: bytes) -> str:
         encoding_dict = CharMixin.char_detect(bytes_content)  # <class 'dict'>: {'encoding': 'utf-8', 'confidence': 0.99, 'language': ''}
-        if len(bytes_content)>= 52428800:
+        if len(bytes_content) >= 52428800:
             raise Exception('error: char length >= 50MB')
         if encoding_dict.get('confidence') > 0.5:
             return bytes_content.decode(encoding=encoding_dict.get('encoding'))

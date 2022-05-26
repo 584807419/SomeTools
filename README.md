@@ -106,6 +106,16 @@ if __name__ == '__main__':
     print(f'硬盘信息：{demo_ins.os_disk_info()}')
     print(f'网络信息：{demo_ins.os_net_info()}')
 
+    # 获取本月的中国法定节假日和工作日(Get this month's Chinese statutory holidays and working days)
+    calendar_hashmap = Demo.get_calendar_hashmap()
+    demo_ins.logger().info(f"this month's holiday: {calendar_hashmap.get(92)}")
+    demo_ins.logger().info(f"this month's holiday: {calendar_hashmap.get(94)}")
+    demo_ins.logger().info(f"this month's holiday: {calendar_hashmap.get(91)}")
+    demo_ins.logger().info(f"this month's weekend: {calendar_hashmap.get(6)}")
+    demo_ins.logger().info(f"this month's weekend: {calendar_hashmap.get(7)}")
+    demo_ins.logger().info(f"this month's working day: {calendar_hashmap.get(0)}")
+    demo_ins.logger().info(f"this month's extra working day: {calendar_hashmap.get(90)}")
+
     # redis使用(use redis)
     # redis_conn = demo_ins.get_sync_redis_conn(redis_host='10.1.xx.xx',
     #                                           redis_port='6379',

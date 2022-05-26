@@ -12,9 +12,10 @@ from sometools.sync_tools.re_tools import ExtractStringMixIn
 from sometools.sync_tools.image_tools import ImageMixin
 from sometools.sync_tools.char_tools import CharMixin
 from sometools.sync_tools.os_tools import OsMixin
+from sometools.sync_tools.ip_tools import IpMixIn
 
 
 class Common_tools(ChineseToPinyinMixIn, TraditionalSimplifiedChineseMixIn, UrlEncodeDecodeMixIn, DatetimeMixIn,
-                   StringMixIn, ImageMixin, CharMixin, ExtractStringMixIn, OsMixin, LogMixIn, RedisMixIn):
+                   StringMixIn, IpMixIn, ImageMixin, CharMixin, ExtractStringMixIn, OsMixin, LogMixIn, RedisMixIn):
     def __init__(self, *args, **kwargs):
         super(Common_tools, self).__init__(*args, **kwargs)

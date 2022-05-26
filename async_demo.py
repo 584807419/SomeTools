@@ -23,10 +23,10 @@ class Demo(CommonAsyncTools):
 
     async def ready(self, **kwargs):
         # 1. redis示例
-        self.aio_redis_conn = await self.get_async_redis_conn(redis_host='10.1.90.29',
+        self.aio_redis_conn = await self.get_async_redis_conn(redis_host='xx.xx.xx.xx',
                                                               redis_port='6379',
-                                                              redis_db=15,
-                                                              redis_pwd='lhdna2016')
+                                                              redis_db=1,
+                                                              redis_pwd='xxx')
         msg = await self.aio_redis_conn.set('temp_key', 'test string')
         print(f'redis set {msg}')
         msg = await self.aio_redis_conn.get('temp_key')

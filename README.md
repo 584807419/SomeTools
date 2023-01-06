@@ -15,18 +15,24 @@
 * 将中文字符转为其拼音的首字母 （* Convert Chinese characters to the first letter of their Pinyin）
 * 更加方便的日志记录工具 （* More convenient logging tools）
 * 繁体简体中文汉字转换工具 （* Traditional and Simplified Chinese character conversion tool）
+* url编码解码(url encoding and decoding)
+* 正则表达式提取字符串中的中文内容工具 （* Regular expression extraction tool for Chinese content in strings）
+* 检测 bytes 编码 （* Detect bytes encoding）
+* 查看硬件信息(View hardware information)
+* 获取本月的中国法定节假日和工作日(Get this month's Chinese statutory holidays and working days)
+
 * redis创建连接同步、异步工具 （* redis creates connection synchronous and asynchronous tools）
 * 异步布隆过滤工具 （* Asynchronous Bloom Filter Tool）
-* 正则表达式提取字符串中的中文内容工具 （* Regular expression extraction tool for Chinese content in strings）
 * 异步 mysql orm （* async mysql orm）
-* 检测 bytes 编码 （* Detect bytes encoding）
 * 图片处理 （* Image processing）
 * 查看操作系统信息 （* View operating system information）
 * 获取本机ip地址 （* Get the local ip address）
 
+
 ## Installation （安装）
 
 ``` bash
+$ python -m pip install --upgrade pip
 $ pip install SomeTools -i https://pypi.python.org/simple
 ```
 

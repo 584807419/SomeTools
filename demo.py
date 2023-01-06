@@ -70,11 +70,8 @@ if __name__ == '__main__':
 
     # 获取本月的中国法定节假日和工作日(Get this month's Chinese statutory holidays and working days)
     calendar_hashmap = Demo.get_calendar_hashmap()
-    demo_ins.logger().info(f"this month's holiday: {calendar_hashmap.get(92)}")
-    demo_ins.logger().info(f"this month's holiday: {calendar_hashmap.get(94)}")
-    demo_ins.logger().info(f"this month's holiday: {calendar_hashmap.get(91)}")
-    demo_ins.logger().info(f"this month's weekend: {calendar_hashmap.get(6)}")
-    demo_ins.logger().info(f"this month's weekend: {calendar_hashmap.get(7)}")
+    demo_ins.logger().info(f"this month's holiday: {calendar_hashmap.get('holiday')}")
+    demo_ins.logger().info(f"this month's weekend: {calendar_hashmap.get('weekend')}")
     demo_ins.logger().info(f"this month's working day: {calendar_hashmap.get(0)}")
     demo_ins.logger().info(f"this month's extra working day: {calendar_hashmap.get(90)}")
 

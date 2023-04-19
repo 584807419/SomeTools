@@ -85,3 +85,14 @@ if __name__ == '__main__':
     # demo_ins.logger().info(f"redis set {msg}")
     # msg = redis_conn.get('temp_key1')
     # demo_ins.logger().info(f"redis get {msg}")
+
+    # mysql 连接池
+    # 连接池执行
+    pool = demo_ins.get_sync_mysql_conn()
+    localhost_conn = pool.connection()
+    _cursor = localhost_conn.cursor()
+    _cursor.execute("select * from django_admin_log")
+    result = _cursor.fetchall()
+    _cursor.close()
+    localhost_conn.close()
+    print(result)

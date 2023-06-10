@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(name='SomeTools',
-      version='0.1.39',
+      version='0.1.40',
       description="Some python tools",
       author="zhangkun",
       author_email="zk.kyle@foxmail.com",
@@ -38,6 +38,7 @@ setup(name='SomeTools',
           "psutil==5.9.0",
           "aiomysql==0.0.22",
           "pymysql==0.9.3",
+          "pycryptodome==3.18.0",
           # "orjson",  # 底层使用了rust，Python下最快的json库,比 ujson 快 3 倍，比 json 快 6 倍
       ],
       py_modules=['sometools'],

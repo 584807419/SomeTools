@@ -10,7 +10,40 @@ class Demo(Common_tools):
 
 if __name__ == '__main__':
     demo_ins = Demo()
+    # 计算base64
+    demo_ins.logger().info(f"\n")
+    demo_ins.logger().info(f"计算base64")
+    content = "一直小老虎"
+    content_encode = content.encode()
+    demo_ins.logger().info(f"计算base64 需要输入bytes 原内容：{content} encode之后：{content_encode}")
+    res_text = demo_ins.base64_encode(content_encode)
+    demo_ins.logger().info(f"加密base64得到 bytes：{res_text}")
+    content = demo_ins.base64_decode(res_text)
+    demo_ins.logger().info(f"解密base64得到 bytes：{content} decode之后得到string:{content.decode()}")
+
+    # 计算url safe base64
+    demo_ins.logger().info(f"\n")
+    demo_ins.logger().info(f"计算url safe base64")
+    content = "https://videotools.cn"
+    content_encode = content.encode()
+    demo_ins.logger().info(f"计算base64 需要输入bytes 原内容：{content} encode之后：{content_encode}")
+    res_text = demo_ins.base64_encode_urlsafe(content_encode)
+    demo_ins.logger().info(f"加密base64得到 bytes：{res_text}")
+    content = demo_ins.base64_decode_urlsafe(res_text)
+    demo_ins.logger().info(f"解密base64得到 bytes：{content} decode之后得到string:{content.decode()}")
+
+    # 计算md5
+    demo_ins.logger().info(f"\n")
+    demo_ins.logger().info(f"计算md5 需要输入bytes")
+    content = "一直小老虎"
+    content = content.encode()
+    res_text = demo_ins.get_md5_str(content)
+    demo_ins.logger().info(f"计算md5得到str：{res_text}")
+    res_text = demo_ins.get_md5_bytes(content)
+    demo_ins.logger().info(f"计算md5得到bytes：{res_text}")
+
     # 填充、去填充
+    demo_ins.logger().info(f"\n")
     demo_ins.logger().info(f"填充、去填充")
     content = b'abcdefghijklmnh'
     demo_ins.logger().info(f"填充前：{content}")

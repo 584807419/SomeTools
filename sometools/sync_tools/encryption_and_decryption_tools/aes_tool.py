@@ -8,7 +8,8 @@ class AesMixIn(Base):
     def __init__(self, *args, **kwargs):
         super(AesMixIn, self).__init__(*args, **kwargs)
 
-    def aes_ecb_encryption(self, content, password: bytes) -> bytes:
+    @staticmethod
+    def aes_ecb_encryption(content, password: bytes) -> bytes:
         """
         ECB模式加密
         :param content:明文必须为16字节或者16字节的倍数的字节型数据，如果不够16字节需要进行补全
@@ -19,7 +20,8 @@ class AesMixIn(Base):
         en_text = aes.encrypt(content)  # 加密明文
         return en_text
 
-    def aes_ecb_decryption(self, en_text, password: bytes) -> bytes:
+    @staticmethod
+    def aes_ecb_decryption(en_text, password: bytes) -> bytes:
         """
         ECB模式解密
         :param en_text 加密后的密文
@@ -30,7 +32,8 @@ class AesMixIn(Base):
         content = aes.decrypt(en_text)
         return content
 
-    def aes_cbc_encryption(self, content, password, iv: bytes) -> bytes:
+    @staticmethod
+    def aes_cbc_encryption(content, password, iv: bytes) -> bytes:
         """
         CBC模式的加密
         :param content:明文必须为16字节或者16字节的倍数的字节型数据，如果不够16字节需要进行补全
@@ -42,7 +45,8 @@ class AesMixIn(Base):
         en_text = aes.encrypt(content)  # 加密明文
         return en_text
 
-    def aes_cbc_decryption(self, en_text, password, iv: bytes) -> bytes:
+    @staticmethod
+    def aes_cbc_decryption(en_text, password, iv: bytes) -> bytes:
         """
         CBC模式解密
         :param en_text 加密后的密文
@@ -55,14 +59,16 @@ class AesMixIn(Base):
         content = aes.decrypt(en_text)
         return content
 
-    def aes_pad(self, content) -> bytes:
+    @staticmethod
+    def aes_pad(content) -> bytes:
         """
         填充
         """
         text = pad(content, AES.block_size)
         return text
 
-    def aes_unpad(self, en_text) -> bytes:
+    @staticmethod
+    def aes_unpad(en_text) -> bytes:
         """
         去填充
         """

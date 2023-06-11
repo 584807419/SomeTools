@@ -95,6 +95,10 @@ class StringField(Field):
     def __init__(self, name=None, primary_key=False, default=None, ddl='varchar(100)'):
         super().__init__(name, ddl, primary_key, default)
 
+class DecimalField(Field):
+
+    def __init__(self, name=None, primary_key=False, default=None, ddl='decimal(20,6)'):
+        super().__init__(name, ddl, primary_key, default)
 
 class BooleanField(Field):
 
@@ -107,12 +111,20 @@ class IntegerField(Field):
     def __init__(self, name=None, primary_key=False, default=0):
         super().__init__(name, 'bigint', primary_key, default)
 
+# class IntegerFieldWithNull(Field):
+#
+#     def __init__(self, name=None, primary_key=False, default=None):
+#         super().__init__(name, 'bigint', primary_key, default)
 
 class FloatField(Field):
 
     def __init__(self, name=None, primary_key=False, default=0.0):
         super().__init__(name, 'real', primary_key, default)
 
+class FloatFieldWithNull(Field):
+
+    def __init__(self, name=None, primary_key=False, default=None):
+        super().__init__(name, 'real', primary_key, default)
 
 class TextField(Field):
 
@@ -231,6 +243,20 @@ class Model(dict, metaclass=ModelMetaclass):
                 return rs
 
     @classmethod
+    async def select_by_pk(cls, db_pool, table_name, pk: int):
+        """
+        根据主键查找数据
+        :param db_pool:
+        :param pk: int
+        :return: cls
+        """
+        ' find object by primary key. '
+        rs = await _exec_select_sql(db_pool, '%s where `%s`=?' % (cls.__select__.replace("__Placeholder_identifier__", table_name), cls.__primary_key__), [pk], 1)
+        if len(rs) == 0:
+            return None
+        return cls(**rs[0])
+
+    @classmethod
     async def select_by_where(cls, db_pool=None, table_name=None, **kwargs) -> list:
         """
         where条件查询,适用于固定相等的筛选条件
@@ -283,7 +309,7 @@ class Model(dict, metaclass=ModelMetaclass):
                                        self.__insert__.replace("__Placeholder_identifier__", table_name),
                                        temp_list)
         if rows != 1:
-            raise BaseException('failed to insert record: affected rows: %s' % rows)
+            raise Exception('failed to insert record: affected rows: %s' % rows)
         return data_pk
 
     async def update_db_date(self, table_name=None):
@@ -304,7 +330,7 @@ class Model(dict, metaclass=ModelMetaclass):
         args = [self.getValue(self.__primary_key__)]
         data_pk, rows = await _execute(self.__db_conn_pool__, self.__delete__.replace("__Placeholder_identifier__", table_name), args)
         if rows != 1:
-            raise BaseException('failed to remove by primary key: affected rows: %s' % rows)
+            raise Exception('failed to remove by primary key: affected rows: %s' % rows)
         return rows
 
     @classmethod

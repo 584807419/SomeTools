@@ -7,7 +7,7 @@
 #     又如，Url的编码格式采用的是ASCII码，而不是Unicode，这也就是说你不能在Url中包含任何非ASCII字符，例如中文。否则如果客户端浏览器和服务端浏览器支持的字符集不同的情况下，中文可能会造成问题。
 # -*- coding: utf-8 -*-
 
-from urllib.request import quote, unquote
+from urllib.parse import quote, unquote
 
 from sometools.sync_tools.base import Base
 

@@ -16,10 +16,12 @@ from sometools.sync_tools.os_tools import OsMixin
 from sometools.sync_tools.ip_tools import IpMixIn
 from sometools.sync_tools.calendar_tools import CalendarMixIn
 from sometools.sync_tools.encryption_and_decryption_tools import EncryptionDecryptionMixIn
+from sometools.sync_tools.md5_tools import Md5Mixin
+from sometools.sync_tools.base64_tools import Base64Mixin
 
 
 class Common_tools(ChineseToPinyinMixIn, TraditionalSimplifiedChineseMixIn, UrlEncodeDecodeMixIn, DatetimeMixIn,
                    StringMixIn, IpMixIn, CalendarMixIn, ImageMixin, CharMixin, ExtractStringMixIn, OsMixin, LogMixIn,
-                   RedisMixIn, MysqlPoolMixIn, EncryptionDecryptionMixIn):
+                   RedisMixIn, MysqlPoolMixIn, EncryptionDecryptionMixIn, Md5Mixin, Base64Mixin):
     def __init__(self, *args, **kwargs):
         super(Common_tools, self).__init__(*args, **kwargs)

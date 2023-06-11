@@ -8,11 +8,13 @@ class RsaMixIn(Base):
     def __init__(self, *args, **kwargs):
         super(RsaMixIn, self).__init__(*args, **kwargs)
 
-    def rsa_get_key_pair(self) -> (PublicKey, PrivateKey):
+    @staticmethod
+    def rsa_get_key_pair() -> (PublicKey, PrivateKey):
         """生成密钥对"""
         pubkey, prikey = rsa.newkeys(1024)
         return pubkey, prikey
 
+    @staticmethod
     def rsa_create_pub_key(self) -> (PublicKey, PrivateKey):
         """创建公钥"""
         # 公钥有两个值  n,e
@@ -27,12 +29,14 @@ class RsaMixIn(Base):
         pubkey = rsa.PublicKey(rsa_n, rsa_e)
         return pubkey
 
-    def rsa_sign(self, content: bytes, pri_key: PrivateKey, sign_type: str = 'MD5') -> bytes:
+    @staticmethod
+    def rsa_sign(content: bytes, pri_key: PrivateKey, sign_type: str = 'MD5') -> bytes:
         """加签    rsa.sign(原信息，私钥，加密方式)  生成加签过后的信息"""
         sign_message = rsa.sign(content, pri_key, sign_type)
         return sign_message
 
-    def rsa_verify(self, content: bytes, pub_key: PublicKey, sign_message: bytes) -> (PublicKey, PrivateKey):
+    @staticmethod
+    def rsa_verify(content: bytes, pub_key: PublicKey, sign_message: bytes) -> (PublicKey, PrivateKey):
         """验签    rsa.verify(需要验证的信息，加签过后的信息，公钥),如果需要验证的信息，是原信息，返回加密方式"""
         try:
             veri_res = rsa.verify(content, sign_message, pub_key)
@@ -42,10 +46,12 @@ class RsaMixIn(Base):
             print(f"校验未通过-信息被篡改过-{e}")
             return False
 
-    def rsa_encryption(self, content: bytes, pubkey: PublicKey) -> bytes:
+    @staticmethod
+    def rsa_encryption(content: bytes, pubkey: PublicKey) -> bytes:
         """加密：使用公钥"""
         return rsa.encrypt(content, pubkey)
 
-    def rsa_decryption(self, en_text: bytes, prikey: PrivateKey) -> bytes:
+    @staticmethod
+    def rsa_decryption(en_text: bytes, prikey: PrivateKey) -> bytes:
         """解密：使用私钥"""
         return rsa.decrypt(en_text, prikey)

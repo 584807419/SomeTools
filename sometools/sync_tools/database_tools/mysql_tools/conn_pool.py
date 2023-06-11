@@ -6,6 +6,8 @@ from sometools.sync_tools.base import Base
 
 # pip install mysqlclient -i https://pypi.tuna.tsinghua.edu.cn/simple
 # pip install DBUtils -i https://pypi.tuna.tsinghua.edu.cn/simple
+# 使用dbutils的PooledDB连接池，操作数据库。
+# 这样就不需要每次执行sql后都关闭数据库连接，频繁的创建连接，消耗时间
 # PooledDB 提供线程间可共享的数据库连接，并自动管理连接。一般来说，PooledDB 的数据库连接耗时更稳定，大多数情况下都推荐使用。
 # import sys
 # from MySQLdb.converters import conversions

@@ -90,7 +90,7 @@ if __name__ == '__main__':
     demo_ins.logger().info(f"密文：{en_text}")
     content = demo_ins.aes_ecb_decryption(en_text, password)
     demo_ins.logger().info(f'解密解码后中文明文：{content.decode("gbk")} 解密后同样需要进行解码')
-    #RSA加密解密
+    # RSA加密解密
     demo_ins.logger().info(f"\n")
     demo_ins.logger().info(f"RSA加密解密 使用bytes")
     # 生成密钥对
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     demo_ins.logger().info(f"密文{en_text}")
     content = demo_ins.rsa_decryption(en_text, prikey)
     demo_ins.logger().info(f"解密后{content.decode()}")
-    #RSA加签、验签
+    # RSA加签、验签
     demo_ins.logger().info(f"\n")
     demo_ins.logger().info(f"RSA加签 使用bytes")
     content = '本周美联储会降息'
@@ -116,7 +116,7 @@ if __name__ == '__main__':
     demo_ins.logger().info(f"RSA加签后签名信息:{sign_message}")
     demo_ins.logger().info(f"RSA验证 使用未被修改过的内容")
     demo_ins.logger().info(f"内容：{content}")
-    sign_res = demo_ins.rsa_verify(content.encode(), pubkey,sign_message)
+    sign_res = demo_ins.rsa_verify(content.encode(), pubkey, sign_message)
     if sign_res:
         demo_ins.logger().info(f"校验通过")
     else:
@@ -124,12 +124,11 @@ if __name__ == '__main__':
     demo_ins.logger().info(f"RSA验证 使用被修改过的内容")
     content = '本周美联储不会降息'
     demo_ins.logger().info(f"内容：{content}")
-    sign_res = demo_ins.rsa_verify(content.encode(), pubkey,sign_message)
+    sign_res = demo_ins.rsa_verify(content.encode(), pubkey, sign_message)
     if sign_res:
         demo_ins.logger().info(f"校验通过")
     else:
         demo_ins.logger().warning(f"校验未能通过")
-
 
     # 获取本机ip地址
     demo_ins.logger().info(f"\n")
@@ -168,8 +167,10 @@ if __name__ == '__main__':
     # 中文繁体简体互转
     demo_ins.logger().info(f"\n")
     demo_ins.logger().info(f"中文繁体简体互转")
-    demo_ins.logger().info(f"繁体转简体 眾議長與李克強會談->{Demo.traditional_chinese_to_simplified('眾議長與李克強會談')}")
-    demo_ins.logger().info(f"简体转繁体 众议长与李克强会谈->{Demo.simplified_chinese_to_traditional_chinese('众议长与李克强会谈')}")
+    demo_ins.logger().info(
+        f"繁体转简体 眾議長與李克強會談->{Demo.traditional_chinese_to_simplified('眾議長與李克強會談')}")
+    demo_ins.logger().info(
+        f"简体转繁体 众议长与李克强会谈->{Demo.simplified_chinese_to_traditional_chinese('众议长与李克强会谈')}")
 
     # url编码解码
     demo_ins.logger().info(f"\n")
@@ -180,9 +181,11 @@ if __name__ == '__main__':
     # 正则提取中文
     demo_ins.logger().info(f"\n")
     demo_ins.logger().info(f"正则提取中文")
-    temp_str = demo_ins.extract_one_chinese("""downloadPdf1('http://www.sse.com.cn/disclosure/bond/announcement/company/c/2021-03-22/4135530025747110334559080.pdf','厦门建发股份有限公司2021年面向专业投资者公开发行可续期公司债券（第一期）发行公告','2021-03-22','1015','pdf');""")
+    temp_str = demo_ins.extract_one_chinese(
+        """downloadPdf1('http://www.sse.com.cn/disclosure/bond/announcement/company/c/2021-03-22/4135530025747110334559080.pdf','厦门建发股份有限公司2021年面向专业投资者公开发行可续期公司债券（第一期）发行公告','2021-03-22','1015','pdf');""")
     demo_ins.logger().info(f"正则提取单个中文 {temp_str}")
-    temp_str = demo_ins.extract_multi_chinese("""downloadPdf1('http://www.sse.com.cn/disclosure/bond/announcement/company/c/2021-03-22/4135530025747110334559080.pdf','厦门建发股份有限公司2021年面向专业投资者公开发行可续期公司债券（第一期）发行公告','2021-03-22','1015','pdf');""")
+    temp_str = demo_ins.extract_multi_chinese(
+        """downloadPdf1('http://www.sse.com.cn/disclosure/bond/announcement/company/c/2021-03-22/4135530025747110334559080.pdf','厦门建发股份有限公司2021年面向专业投资者公开发行可续期公司债券（第一期）发行公告','2021-03-22','1015','pdf');""")
     demo_ins.logger().info(f"正则提取多个中文 {temp_str}")
 
     # 检测和转换编码方式
@@ -230,11 +233,17 @@ if __name__ == '__main__':
 
     # mysql 连接池
     # 连接池执行
-    # pool = demo_ins.get_sync_mysql_conn()
-    # localhost_conn = pool.connection()
-    # _cursor = localhost_conn.cursor()
-    # _cursor.execute("select * from django_admin_log")
-    # result = _cursor.fetchall()
-    # _cursor.close()
-    # localhost_conn.close()
-    # print(result)
+    pool = demo_ins.get_sync_mysql_conn(host='localhost', port=3306, user='root', passwd='', db='my_site')  # 连接参数
+    localhost_conn = pool.connection()
+    _cursor = localhost_conn.cursor()
+    _cursor.execute("select * from django_admin_log")
+    result = _cursor.fetchall()
+    _cursor.close()
+    localhost_conn.close()
+    print(result)
+    localhost_conn = pool.connection()
+    _cursor = localhost_conn.cursor()
+    _cursor.execute("""INSERT INTO xxxx""")
+    localhost_conn.commit()
+    _cursor.close()
+    localhost_conn.close()

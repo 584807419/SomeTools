@@ -211,6 +211,11 @@ if __name__ == '__main__':
     print(f'硬盘信息：{demo_ins.os_disk_info()}')
     print(f'网络信息：{demo_ins.os_net_info()}')
 
+    # 进程池
+    demo_ins.logger().info(f"\n")
+    demo_ins.logger().info(f"进程池")
+    demo_ins.multi_run(3, 3)
+
     # 获取本月的中国法定节假日和工作日
     demo_ins.logger().info(f"\n")
     demo_ins.logger().info(f"获取本月的中国法定节假日和工作日")
@@ -230,6 +235,8 @@ if __name__ == '__main__':
     # demo_ins.logger().info(f"redis set {msg}")
     # msg = redis_conn.get('temp_key1')
     # demo_ins.logger().info(f"redis get {msg}")
+
+
 
     # mysql 连接池
     # 连接池执行

@@ -226,15 +226,18 @@ if __name__ == '__main__':
     demo_ins.logger().info(f"本月额外工作日: {calendar_hashmap.get(90)}")
 
     # redis使用(use redis)
-    # redis_conn = demo_ins.get_sync_redis_conn(redis_host='10.1.xx.xx',
-    #                                           redis_port='6379',
-    #                                           redis_db=1,
-    #                                           redis_pwd='xx'
-    #                                           )
-    # msg = redis_conn.set('temp_key1', 'test string1')
-    # demo_ins.logger().info(f"redis set {msg}")
-    # msg = redis_conn.get('temp_key1')
-    # demo_ins.logger().info(f"redis get {msg}")
+    redis_conn = demo_ins.get_sync_redis_conn(redis_host='10.1.xx.xx',
+                                              redis_port='6379',
+                                              redis_db=1,
+                                              redis_pwd='xx'
+                                              )
+    msg = redis_conn.set('temp_key1', 'test string1')
+    demo_ins.logger().info(f"redis set {msg}")
+    msg = redis_conn.get('temp_key1')
+    demo_ins.logger().info(f"redis get {msg}")
+    company_id = redis_conn.hget('tyc_name_id_dict', "分大赛芬达")
+    company1_id = redis_conn.hset('tyc_name_id_dict', "分大赛芬达", 2313214123)
+    company2_id = redis_conn.hget('tyc_name_id_dict', "分大赛芬达")
 
 
 

@@ -46,3 +46,31 @@ class MysqlPoolMixIn(Base):
             # conv=mysqlclient_converters()
         )
         return pool
+
+
+# 简单使用
+import MySQLdb
+from MySQLdb.cursors import DictCursor
+import json
+
+
+localhost_conn = MySQLdb.connect(
+    host='127.0.0.1',
+    port=3306,
+    user='root',
+    passwd='root',
+    db='lh_news_spider',
+    charset='utf8mb4'
+)
+aa_set = set()
+localhost_cur = localhost_conn.cursor(DictCursor)
+
+# sql = f"select * from lh_ns_info where data_source = '中国证券监督管理委员会' and news_type = 37;"
+sql = f"select * from lh_rule_operation_relation a left join lh_data_rule b on a.rule_id=b.id where a.is_valid = 1 and a.datasource_id = 1 and a.data_position = 1 and a.operation_id is NULL order by a.order asc"
+localhost_cur.execute(sql)
+raw = localhost_cur.fetchall()
+rec_count = len(raw)
+data_hash_map = json.loads(raw[0][0])
+data_hash_map = json.loads(raw[0][0])
+
+

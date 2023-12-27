@@ -16,6 +16,11 @@ class AsyncIoRedisMixIn(Base):
     async def get_async_redis_conn(self, **kwargs):
         # Redis client bound to pool of connections (auto-reconnecting).
         # https://aioredis.readthedocs.io/en/latest/
+
+        # aio_redis_conn = await aioredis.create_redis_pool(('127.0.0.1', 6379), encoding='utf-8',
+        #                                                   db=15, password=None,
+        #                                                   loop=asyncio.get_running_loop())
+
         return aioredis.from_url(
             f"redis://:{kwargs.get('redis_pwd')}@{kwargs.get('redis_host')}:{kwargs.get('redis_port')}/{kwargs.get('redis_db')}", encoding="utf-8", decode_responses=True
         )

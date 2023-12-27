@@ -7,6 +7,7 @@ from sometools.sync_tools.datetime_tools import DatetimeMixIn
 from sometools.sync_tools.chinese_to_pinyin_acronym import ChineseToPinyinMixIn
 from sometools.sync_tools.traditional_simplified_chinese_conversion import TraditionalSimplifiedChineseMixIn
 from sometools.sync_tools.url_tools import UrlEncodeDecodeMixIn
+from sometools.sync_tools.html_tools import HtmlMixIn
 from sometools.sync_tools.redis_tools import RedisMixIn
 from sometools.sync_tools.database_tools.mysql_tools.conn_pool import MysqlPoolMixIn
 from sometools.sync_tools.re_tools import ExtractStringMixIn
@@ -21,8 +22,9 @@ from sometools.sync_tools.md5_tools import Md5Mixin
 from sometools.sync_tools.base64_tools import Base64Mixin
 
 
-class Common_tools(ChineseToPinyinMixIn, TraditionalSimplifiedChineseMixIn, UrlEncodeDecodeMixIn, DatetimeMixIn,
-                   StringMixIn, IpMixIn, MultiProcessMixIn, CalendarMixIn, ImageMixin, CharMixin, ExtractStringMixIn, OsMixin, LogMixIn,
+class Common_tools(ChineseToPinyinMixIn, TraditionalSimplifiedChineseMixIn, UrlEncodeDecodeMixIn,
+                   HtmlMixIn, DatetimeMixIn, StringMixIn, IpMixIn, MultiProcessMixIn, CalendarMixIn, ImageMixin,
+                   CharMixin, ExtractStringMixIn, OsMixin, LogMixIn,
                    RedisMixIn, MysqlPoolMixIn, EncryptionDecryptionMixIn, Md5Mixin, Base64Mixin):
     def __init__(self, *args, **kwargs):
         super(Common_tools, self).__init__(*args, **kwargs)

@@ -10,6 +10,10 @@ class Demo(Common_tools):
 
 if __name__ == '__main__':
     demo_ins = Demo()
+
+    # html 转义还原
+    demo_ins.html_unescape("&#x27;&amp; &lt; &gt;&quot;&#x27;")  # 还原
+    demo_ins.html_escape("""'& < >\"'""")  # 转义
     # 计算base64
     demo_ins.logger().info(f"\n")
     demo_ins.logger().info(f"计算base64")
@@ -196,7 +200,8 @@ if __name__ == '__main__':
     # print(f'解码bytes内容转为str结果：{demo_ins.char_to_str(_temp_content)}')
 
     # 直接显示网络图片（不落盘）
-    demo_ins.show_network_img("https://ess.leju.com/house/photo/42-1-l2wMOKdjt7QU9k4PZ9dntGxyoqevwkVSFitJfUEytNAgu83XESHK0g4TJDFcgW4tWjdLECS438dUe9FE.jpg")
+    demo_ins.show_network_img(
+        "https://ess.leju.com/house/photo/42-1-l2wMOKdjt7QU9k4PZ9dntGxyoqevwkVSFitJfUEytNAgu83XESHK0g4TJDFcgW4tWjdLECS438dUe9FE.jpg")
     print(f"直接显示网络图片")
 
     # 图片模糊
@@ -242,8 +247,6 @@ if __name__ == '__main__':
     company_id = redis_conn.hget('tyc_name_id_dict', "分大赛芬达")
     company1_id = redis_conn.hset('tyc_name_id_dict', "分大赛芬达", 2313214123)
     company2_id = redis_conn.hget('tyc_name_id_dict', "分大赛芬达")
-
-
 
     # mysql 连接池
     # 连接池执行

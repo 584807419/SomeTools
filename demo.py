@@ -195,6 +195,10 @@ if __name__ == '__main__':
     print(f'检测bytes内容编码结果：{demo_ins.char_detect(_temp_content)}')
     # print(f'解码bytes内容转为str结果：{demo_ins.char_to_str(_temp_content)}')
 
+    # 直接显示网络图片（不落盘）
+    demo_ins.show_network_img("https://ess.leju.com/house/photo/42-1-l2wMOKdjt7QU9k4PZ9dntGxyoqevwkVSFitJfUEytNAgu83XESHK0g4TJDFcgW4tWjdLECS438dUe9FE.jpg")
+    print(f"直接显示网络图片")
+
     # 图片模糊
     # temp_aa = demo_ins.img_blurred(r'E:\Users\Administrator\Documents\SomeTools\win11_sunrise.jpg')
     # print(f"图片模糊后路径{temp_aa}")

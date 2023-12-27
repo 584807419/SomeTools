@@ -1,7 +1,12 @@
 import os
 import random
+from io import BytesIO
+
+import requests as req
+from PIL import Image
+from PIL import ImageDraw, ImageFont, ImageFilter
+
 from sometools.sync_tools.base import Base
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 
 class ImageMixin(Base):
@@ -22,7 +27,7 @@ class ImageMixin(Base):
             dir_path, file_ext_name = os.path.splitext(img_path)
             im = Image.open(img_path)
             im2 = im.filter(ImageFilter.BLUR)
-            _new_img_path = dir_path+'img_blurred'+file_ext_name
+            _new_img_path = dir_path + 'img_blurred' + file_ext_name
             im2.save(_new_img_path, 'jpeg')
             return _new_img_path
         else:
@@ -71,8 +76,14 @@ class ImageMixin(Base):
             draw.text((60 * t + 10, 10), _sin_str, font=font, fill=rndColor2())
         # 模糊:
         image = image.filter(ImageFilter.BLUR)
-        _output_path_str = _temp_str+'.jpg'
+        _output_path_str = _temp_str + '.jpg'
         if img_path:
             _output_path_str = img_path + 'code.jpg'
         image.save(_output_path_str, 'jpeg')
         return _temp_str, _output_path_str
+
+    @staticmethod
+    def show_network_img(img_url: str):
+        response = req.get(img_url, verify=False)
+        image = Image.open(BytesIO(response.content))
+        image.show()

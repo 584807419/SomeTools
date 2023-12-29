@@ -24,9 +24,12 @@
 # %Y 年份的完整拼写
 
 
-import re
 import datetime
+import re
 from datetime import timedelta
+
+from pytz import timezone
+
 from sometools.sync_tools.base import Base
 
 _datetime_fmt_list = ['%Y-%m-%d %H:%M:%S',
@@ -276,3 +279,22 @@ class DatetimeMixIn(Base):
         """
         assert isinstance(timestamp_int, int)
         return datetime.datetime.fromtimestamp(timestamp_int)
+
+    @staticmethod
+    def get_now_utc_time() -> datetime.datetime:
+        """
+        获取到当前UTC时间(此时utc_now.tzinfo为None)
+        :return: datetime.datetime
+        """
+        utc_now = datetime.datetime.utcnow()
+        return utc_now
+
+    @staticmethod
+    def set_tz_time(tzchina = timezone('Asia/Chongqing')) -> datetime.datetime:
+        """
+        时区转换(此时utc_now.tzinfo为None)
+        :return: datetime.datetime
+        """
+        utc_now = datetime.datetime.utcnow()
+        utc = timezone('UTC')
+        return utc_now.replace(tzinfo=utc).astimezone(tzchina)

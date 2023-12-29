@@ -281,6 +281,22 @@ class DatetimeMixIn(Base):
         return datetime.datetime.fromtimestamp(timestamp_int)
 
     @staticmethod
+    def timestamp_int_to_utc_obj(data: int) -> datetime.datetime:
+        """
+        将时间戳转换为UTC时间
+        :param timestamp_int: int
+        :return: datetime.datetime
+        """
+        # 将时间戳转换为UTC时间
+        data = datetime.datetime.utcfromtimestamp(data)
+        utc_tz = timezone('UTC')
+        # 将UTC时间增加时区
+        data = data.replace(tzinfo=utc_tz)
+        # 转换时区
+        datas = data.astimezone(timezone('Asia/Chongqing'))  # 直接转带时区的时间
+        return datas
+
+    @staticmethod
     def get_now_utc_time() -> datetime.datetime:
         """
         获取到当前UTC时间(此时utc_now.tzinfo为None)
@@ -296,5 +312,8 @@ class DatetimeMixIn(Base):
         :return: datetime.datetime
         """
         utc_now = datetime.datetime.utcnow()
-        utc = timezone('UTC')
-        return utc_now.replace(tzinfo=utc).astimezone(tzchina)
+        utc_tz = timezone('UTC')
+        # 将UTC时间增加时区
+        data = utc_now.replace(tzinfo=utc_tz)
+        # 转换时区
+        return data.astimezone(tzchina)

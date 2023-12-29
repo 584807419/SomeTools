@@ -148,6 +148,8 @@ if __name__ == '__main__':
     demo_ins.logger().info(f"{demo_ins.obj_to_str(demo_ins.str_to_obj('11-May-2021 07:03 EDT'))}")
     demo_ins.logger().info(f"时间戳转为datetime对象")
     demo_ins.logger().info(f"{demo_ins.timestamp_int_to_obj(1703829880)}")
+    demo_ins.logger().info(f"时间戳转为utc datetime对象")
+    demo_ins.logger().info(f"{demo_ins.timestamp_int_to_utc_obj(1703829880)}")
     demo_ins.logger().info(f"获取到当前UTC时间")
     demo_ins.logger().info(f"{demo_ins.get_now_utc_time()}")
     demo_ins.logger().info(f"时区转换为中国")
